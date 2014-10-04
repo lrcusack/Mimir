@@ -1,3 +1,3 @@
 #!/bin/bash
 
-java -cp ".;commons-math3-3.3.jar;" ControlChart
+java -cp ".;../lib/commons-math3-3.3.jar;../lib/mimir.patterns.jar;" mimir/charts/ControlChart

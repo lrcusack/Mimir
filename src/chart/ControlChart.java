@@ -16,7 +16,7 @@ public class ControlChart{
 		this.sigma = trainingData.getStandardDeviation();
 		this.ucl = this.cl + 3*this.sigma;
 		this.lcl = this.cl - 3*this.sigma;
-		this.patterns = buildDefaultPatterns(0,1);
+		this.patterns = buildDefaultPatterns();
 	}
 
 	public static void main(String[] args){
@@ -25,27 +25,27 @@ public class ControlChart{
 			vals[ii] = Math.random()*10;
 		}
 		ControlChart cc = new ControlChart("xbar", vals);
-		/*System.out.println(
+		System.out.println(
 							"cl: "+ cc.cl + "\n"+
 							"ucl: "+ cc.ucl + "\n"+
 							"lcl: "+ cc.lcl + "\n"+
 							"sigma: "+ cc.sigma + "\n"
-							);*/
+							);
 
 	}
 
 	
-	public PatternRule[] buildDefaultPatterns(double cl, double sigma){
+	public PatternRule[] buildDefaultPatterns(){
 		PatternRule[] rules = new PatternRule[8];
 	
-		rules[0] = new AltIncDec(cl);
-		rules[1] = new ConstIncDec(cl);
-		rules[2] = new OutsideTwoSigma(cl,sigma);
-		rules[3] = new InsideOneSigma(cl,sigma);
-		rules[4] = new OutsideLimits(cl,sigma);
-		rules[5] = new OutsideOneSigma(cl,sigma);
-		rules[6] = new OneSide(cl);
-		rules[7] = new BetweenOneTwo(cl,sigma);	
+		rules[0] = new AltIncDec(this.cl);
+		rules[1] = new ConstIncDec(this.cl);
+		rules[2] = new OutsideTwoSigma(this.cl,this.sigma);
+		rules[3] = new InsideOneSigma(this.cl,this.sigma);
+		rules[4] = new OutsideLimits(this.cl,this.sigma);
+		rules[5] = new OutsideOneSigma(this.cl,this.sigma);
+		rules[6] = new OneSide(this.cl);
+		rules[7] = new BetweenOneTwo(this.cl,this.sigma);	
 	
 		return rules;	
 	}

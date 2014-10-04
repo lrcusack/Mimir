@@ -1,5 +1,6 @@
+//package io.kd.lrcusack.mimir;
+
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
-import PatternRecognition.*;
 
 public class ControlChart{
 	DescriptiveStatistics trainingData;
@@ -32,18 +33,19 @@ public class ControlChart{
 
 	}
 
+	
 	public PatternRule[] buildDefaultPatterns(double cl, double sigma){
 		PatternRule[] rules = new PatternRule[8];
-
-		rules[0] = new PatternRecognition.AltIncDec(cl);
-		rules[1] = new PatternRecognition.ConstIncDec(cl);
-		rules[2] = new PatternRecognition.OutsideTwoSigma(cl,sigma);
-		rules[3] = new PatternRecognition.InsideOneSigma(cl,sigma);
-		rules[4] = new PatternRecognition.OutsideLimits(cl,sigma);
-		rules[5] = new PatternRecognition.OutsideOneSigma(cl,sigma);
-		rules[6] = new PatternRecognition.OneSide(cl);
-		rules[7] = new PatternRecognition.BetweenOneTwo(cl,sigma);	
-
+	
+		rules[0] = new AltIncDec(cl);
+		rules[1] = new ConstIncDec(cl);
+		rules[2] = new OutsideTwoSigma(cl,sigma);
+		rules[3] = new InsideOneSigma(cl,sigma);
+		rules[4] = new OutsideLimits(cl,sigma);
+		rules[5] = new OutsideOneSigma(cl,sigma);
+		rules[6] = new OneSide(cl);
+		rules[7] = new BetweenOneTwo(cl,sigma);	
+	
 		return rules;	
 	}
 }

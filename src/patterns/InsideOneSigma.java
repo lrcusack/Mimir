@@ -1,5 +1,4 @@
-//package io.kd.lrcusack.mimir;
-
+package mimir.patterns;
 public class InsideOneSigma implements PatternRule {
 	//Fifteen points in a row within one-sigma limits
 	int count;

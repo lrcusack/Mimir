@@ -1,5 +1,4 @@
-//package io.kd.lrcusack.mimir;
-
+package mimir.patterns;
 public class OutsideLimits implements PatternRule {
 	//One or more points outside of control limits
 	double cl;

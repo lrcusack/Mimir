@@ -1,5 +1,4 @@
-//package io.kd.lrcusack.mimir;
-
+package mimir.patterns;
 public class OutsideOneSigma implements PatternRule {
 	//Four of five consecutive points beyond the one-sigma limits but still inside of control limits
 	int nextIndex;

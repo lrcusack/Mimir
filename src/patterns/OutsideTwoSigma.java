@@ -1,5 +1,4 @@
-//package io.kd.lrcusack.mimir;
-
+package mimir.patterns;
 public class OutsideTwoSigma implements PatternRule {
 	//Two of three consecutive points outside the two-sigma warning limits but still within control (3 sigma)  limits
 	int nextIndex;

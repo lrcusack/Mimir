@@ -1,6 +1,7 @@
-//package io.kd.lrcusack.mimir;
+package mimir.charts;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+import mimir.patterns.*;
 
 public class ControlChart{
 	DescriptiveStatistics trainingData;

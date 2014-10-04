@@ -1,5 +1,4 @@
-//package io.kd.lrcusack.mimir;
-
+package mimir.patterns;
 public class OneSide implements PatternRule {
 	//A run of eight consecutive points on one side of the center line
 	double cl;

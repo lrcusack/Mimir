@@ -1,5 +1,4 @@
-//package io.kd.lrcusack.mimir;
-
+package mimir.patterns;
 public class BetweenOneTwo implements PatternRule {
 	//Eight points in a row between the one-sigma and two-sigma limits
 	double cl;

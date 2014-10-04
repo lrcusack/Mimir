@@ -1,5 +1,4 @@
-//package io.kd.lrcusack.mimir;
-
+package mimir.patterns;
 
 public interface PatternRule{
 	//check returns true if the pattern is recognized, i.e. process is out of control

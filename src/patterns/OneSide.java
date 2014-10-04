@@ -6,6 +6,7 @@ public class OneSide implements PatternRule {
 	boolean above;
 	int n = 8;
 	public OneSide(double c){
+		//System.out.println("Just Checking");
 		this.cl = c;
 		this.count=0;
 		this.above=true;

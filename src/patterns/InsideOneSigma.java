@@ -25,11 +25,9 @@ public class InsideOneSigma extends PatternRule {
 	//Fifteen points in a row within one-sigma limits
 	int count;
 	int n = 15;
-	double cl;
-	double sigma;
-	public InsideOneSigma(double c, double s){
-		this.cl = c;
-		this.sigma = s;
+	public InsideOneSigma(double cl, double sigma, double clim, double wlim){
+		this.cl = cl;
+		this.sigma = sigma;
 		this.count=0;
 		this.name = "Fifteen points in a row within one-sigma limits";
 	}

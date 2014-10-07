@@ -21,17 +21,15 @@ along with Mimir.  If not, see <http://www.gnu.org/licenses/>
 
 // #### Verified ####
 package mimir.patterns;
-public class BetweenOneTwo extends PatternRule {
+public class BetweenOneW extends PatternRule {
 	//Eight points in a row between the one-sigma and two-sigma limits
-	double cl;
-	double sigma;
 	int count;
 	int n = 8;
-	public BetweenOneTwo(double c, double s){
-		this.cl = c;
-		this.sigma = s;
+	public BetweenOneW(double cl, double sigma, double clim, double wlim){
+		this.cl = cl;
+		this.sigma = sigma;
 		this.count=0;
-		this.name = "Eight points in a row between the one-sigma and two-sigma limits";
+		this.name = "Eight points in a row between the one-sigma and warning limits";
 	}
 	public boolean check(double value){
 		if((Math.abs(value-this.cl)<= 2*sigma) && (Math.abs(value-this.cl)>=sigma)){

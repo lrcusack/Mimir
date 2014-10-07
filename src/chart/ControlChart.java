@@ -30,74 +30,35 @@ import mimir.patterns.*;
 public class ControlChart{
 	DescriptiveStatistics data;
 	String characteristic;
-	double ucl, cl, lcl, sigma;
+	double ucl, cl, lcl, uwl, lwl, sigma, climit, wlimit;
 	LinkedList<PatternRule> patterns;
 	LinkedList<String> signals;
 
-	public ControlChart(String charName, double[] tSet){
-		this.characteristic = charName;
-		this.data = new DescriptiveStatistics(tSet);
-		this.cl = this.data.getMean();
-		this.sigma = data.getStandardDeviation();
-		this.ucl = this.cl + 3*this.sigma;
-		this.lcl = this.cl - 3*this.sigma;
+	public ControlChart(String charName, double[] tSet, double climit, double wlimit){
 		this.patterns = new LinkedList<PatternRule>();
 		this.signals = new LinkedList<String>();
+		this.reset(charName,tSet,climit,wlimit);
 	}
 
-	public static void main(String[] args){
-		double[] vals = new double[100];
-		for(int ii=0;ii<100;ii++){
-			vals[ii] = Math.random()*10;
-		}
-		ControlChart cc = new ControlChart("xbar", vals);
-		cc.addDefaultPatterns();
-		System.out.println(
-							"cl: "+ cc.cl + "\n"+
-							"ucl: "+ cc.ucl + "\n"+
-							"lcl: "+ cc.lcl + "\n"+
-							"sigma: "+ cc.sigma + "\n"
-							);
-		cc.newValue(8); cc.printSignals(); cc.clearSignals();
-		cc.newValue(8); cc.printSignals(); cc.clearSignals();
-		cc.newValue(8); cc.printSignals(); cc.clearSignals();
-		cc.newValue(8); cc.printSignals(); cc.clearSignals();
-		cc.newValue(8); cc.printSignals(); cc.clearSignals();
-		cc.newValue(2); cc.printSignals(); cc.clearSignals();
-		cc.newValue(2); cc.printSignals(); cc.clearSignals();
-		cc.newValue(2); cc.printSignals(); cc.clearSignals();
-		cc.newValue(2); cc.printSignals(); cc.clearSignals();
-		cc.newValue(2); cc.printSignals(); cc.clearSignals();
-		cc.newValue(2); cc.printSignals(); cc.clearSignals();
-		cc.newValue(5); cc.printSignals(); cc.clearSignals();
-		cc.newValue(5); cc.printSignals(); cc.clearSignals();
-		cc.newValue(5); cc.printSignals(); cc.clearSignals();
-		cc.newValue(5); cc.printSignals(); cc.clearSignals();
-		cc.newValue(5); cc.printSignals(); cc.clearSignals();
-		cc.newValue(5); cc.printSignals(); cc.clearSignals();
-		cc.newValue(5); cc.printSignals(); cc.clearSignals();
-		return;
-	}
-
+	//public static void main(String[] args){}
 	
 	public void addDefaultPatterns(){
 		//System.out.println("Just Checking");
-		this.patterns.add(new AltIncDec(this.cl));
-		this.patterns.add(new ConstIncDec(this.cl));
-		this.patterns.add(new OutsideTwoSigma(this.cl,this.sigma));
-		this.patterns.add(new InsideOneSigma(this.cl,this.sigma));
-		this.patterns.add(new OutsideLimits(this.cl,this.sigma));
-		this.patterns.add(new OutsideOneSigma(this.cl,this.sigma));
-		this.patterns.add(new OneSide(this.cl));
-		this.patterns.add(new BetweenOneTwo(this.cl,this.sigma));	
-	
+		this.patterns.add(new AltIncDec		  (this.cl,this.sigma,this.climit,this.wlimit));
+		this.patterns.add(new ConstIncDec	  (this.cl,this.sigma,this.climit,this.wlimit));
+		this.patterns.add(new OutsideTwoSigma (this.cl,this.sigma,this.climit,this.wlimit));
+		this.patterns.add(new InsideOneSigma  (this.cl,this.sigma,this.climit,this.wlimit));
+		this.patterns.add(new OutsideLimits	  (this.cl,this.sigma,this.climit,this.wlimit));
+		this.patterns.add(new OutsideOneSigma (this.cl,this.sigma,this.climit,this.wlimit));
+		this.patterns.add(new OneSide		  (this.cl,this.sigma,this.climit,this.wlimit));
+		this.patterns.add(new BetweenOneW	  (this.cl,this.sigma,this.climit,this.wlimit));	
+  
 		return;	
 	}
-
 	public void newValue(double value){
 		//add value to data
 		this.data.addValue(value);
-		System.out.println("Added Value: "+value+" to dataset");
+		//System.out.println("Added Value: "+value+" to dataset");
 		//iterate through patterns to catch signals
 		ListIterator<PatternRule> patternChecker = this.patterns.listIterator(0);
 		while(patternChecker.hasNext()){
@@ -112,7 +73,6 @@ public class ControlChart{
 		//handle signals in other scope
 		return;
 	}
-
 	public void addPattern(PatternRule p){
 		this.patterns.add(p);
 		return;
@@ -141,23 +101,62 @@ public class ControlChart{
 		this.lcl = l;
 		return;
 	}
+	public void setUWL(double u){
+		this.uwl = u;
+		return;
+	}
+	public void setLWL(double l){
+		this.lwl = l;
+		return;
+	}
 	public void setCL(double c){
 		this.cl = c;
 		return;
 	}
-	public void reset(double[] newData){
+	public double getUCL(){
+
+		return this.ucl;
+	}
+	public double getLCL(){
+
+		return this.lcl;
+	}
+	public double getUWL(){
+
+		return this.uwl;
+	}
+	public double getLWL(){
+
+		return this.lwl;
+	}
+	public double getCL(){
+
+		return this.cl;
+	}
+	public double getSigma(){
+
+		return this.sigma;
+	}
+	public void dataReset(double[] newData){
 		this.data = new DescriptiveStatistics(newData);
-		this.cl = this.data.getMean();
-		this.sigma = this.data.getStandardDeviation();
-		this.ucl = this.cl + 3*this.sigma;
-		this.lcl = this.cl - 3*this.sigma;
+		this.statsReset();
 		return;
 	}
-	public void reset(){
+	public void statsReset(){
 		this.cl = this.data.getMean();
 		this.sigma = this.data.getStandardDeviation();
-		this.ucl = this.cl + 3*this.sigma;
-		this.lcl = this.cl - 3*this.sigma;
+		this.ucl = this.cl + this.climit*this.sigma;
+		this.lcl = this.cl - this.climit*this.sigma;
+		this.uwl = this.cl + this.wlimit*this.sigma;
+		this.lwl = this.cl - this.wlimit*this.sigma;
 		return;
+	}
+	public void reset(String charName, double[] tSet, double climit,double wlimit){
+		this.characteristic = charName;
+		this.dataReset(tSet);
+		this.climit = climit;
+		this.wlimit = wlimit;
+		this.clearSignals();
+		this.clearPatterns();
 	}
 }

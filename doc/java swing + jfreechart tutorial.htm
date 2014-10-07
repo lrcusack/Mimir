@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="stylesheet" type="text/css" href="http://www.caveofprogramming.com/wp-content/thesis/skins/classic-r/css.css" media="screen, projection" />
+<title>Charts in Java Swing With JFreeChart | Cave of Programming</title>
+<meta name="description" content="Java Swing, the GUI toolkit for Java, has no built-in graphing and charting package. Several free packages are available, the best of which is widely consi" />
+<meta name="robots" content="noodp, noydir" />
+<link rel="canonical" href="http://www.caveofprogramming.com/frontpage/articles/java/charts-in-java-swing-with-jfreechart/" />
+<link rel="alternate" type="application/rss+xml" title="Cave of Programming feed" href="http://www.caveofprogramming.com/feed/" />
+<link rel="pingback" href="http://www.caveofprogramming.com/xmlrpc.php" />
+<link rel="alternate" type="application/rss+xml" title="Cave of Programming &raquo; Charts in Java Swing With JFreeChart Comments Feed" href="http://www.caveofprogramming.com/frontpage/articles/java/charts-in-java-swing-with-jfreechart/feed/" />
+<!-- This site is powered by Shareaholic - https://shareaholic.com -->
+<script type='text/javascript' data-cfasync='false'>
+  //<![CDATA[
+    (function() {
+      var shr = document.createElement('script');
+      shr.setAttribute('data-cfasync', 'false');
+      shr.src = '//dsms0mj1bbhn4.cloudfront.net/assets/pub/shareaholic.js';
+      shr.type = 'text/javascript'; shr.async = 'true';
+      shr.onload = shr.onreadystatechange = function() {
+        var rs = this.readyState;
+        if (rs && rs != 'complete' && rs != 'loaded') return;
+        var site_id = '785542b3b84e608a57a43fa057022d1e';
+        var page_config = {"apps":{"share_buttons":{"get_share_counts":  function(url, services, cb) {
+    Shareaholic.Utils.ajax({
+      cache: true,
+      cache_ttl: '1 minute',
+      url: 'http://www.caveofprogramming.com/wp-admin/admin-ajax.php',
+      data: { action: 'shareaholic_share_counts_api', url: url, services: services },
+      success: function(res) {
+        if(res && res.data) {
+          cb(res.data, true);
+        }
+      }
+    })
+  }}}};
+        try { Shareaholic.init(site_id, page_config); } catch (e) {}
+      };
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(shr, s);
+    })();
+  //]]>
+</script>
+
+<!-- Shareaholic Content Tags -->
+<meta name='shareaholic:site_name' content='Cave of Programming' />
+<meta name='shareaholic:language' content='en-US' />
+<meta name='shareaholic:url' content='http://www.caveofprogramming.com/frontpage/articles/java/charts-in-java-swing-with-jfreechart/' />
+<meta name='shareaholic:keywords' content='charts, java, swing, java articles' />
+<meta name='shareaholic:article_published_time' content='2011-12-20T22:26:18+00:00' />
+<meta name='shareaholic:article_modified_time' content='2014-10-05T15:57:13+00:00' />
+<meta name='shareaholic:shareable_page' content='true' />
+<meta name='shareaholic:article_author_name' content='John' />
+<meta name='shareaholic:site_id' content='785542b3b84e608a57a43fa057022d1e' />
+<meta name='shareaholic:wp_version' content='7.5.0.3' />
+<meta name='shareaholic:image' content='http://www.caveofprogramming.com/wp-content/uploads/2011/12/chart.png' />
+<!-- Shareaholic Content Tags End -->
+
+<!-- Shareaholic Open Graph Tags -->
+<meta property='og:image' content='http://www.caveofprogramming.com/wp-content/uploads/2011/12/chart.png' />
+<!-- Shareaholic Open Graph Tags End -->
+<script type='text/javascript' src='http://www.caveofprogramming.com/wp-includes/js/jquery/jquery.js?ver=1.11.0'></script>
+<script type='text/javascript' src='http://www.caveofprogramming.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
+<script type='text/javascript' src='http://www.caveofprogramming.com/wp-content/plugins/google-analyticator/external-tracking.min.js?ver=6.4.5'></script>
+	
+<!-- START: Syntax Highlighter ComPress -->
+<script type="text/javascript" src="http://www.caveofprogramming.com/wp-content/plugins/syntax-highlighter-compress/scripts/shCore.js"></script>
+<script type="text/javascript" src="http://www.caveofprogramming.com/wp-content/plugins/syntax-highlighter-compress/scripts/shAutoloader.js"></script>
+<link type="text/css" rel="stylesheet" href="http://www.caveofprogramming.com/wp-content/plugins/syntax-highlighter-compress/styles/shCoreDefault.css"/>
+<!-- END: Syntax Highlighter ComPress -->
+
+  
+<!-- All in One SEO Pack 2.0.4.1 by Michael Torbert of Semper Fi Web Design[283,326] -->
+<meta name="description" content="Java Swing, the GUI toolkit for Java, has no built-in graphing and charting package. Several free packages are available, the best of which is widely considered" />
+
+<meta name="keywords" content="charts,java,swing" />
+
+<link rel="canonical" href="http://www.caveofprogramming.com/frontpage/articles/java/charts-in-java-swing-with-jfreechart/" />
+<!-- /all in one seo pack -->
+<!-- Google Analytics Tracking by Google Analyticator 6.4.5: http://www.videousermanuals.com/google-analyticator/ -->
+<script type="text/javascript">
+	var analyticsFileTypes = [''];
+	var analyticsEventTracking = 'enabled';
+</script>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-21085672-3']);
+        _gaq.push(['_addDevId', 'i9k95']); // Google Analyticator App ID with Google 
+        
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+<link rel="shortcut icon" href="http://www.caveofprogramming.com/wp-content/uploads/2013/10/favicon.ico" />
+</head>
+<body class="template-single">
+<div class="text_box">
+	<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+</div>
+<div class="container">
+	<div class="pagewidth">
+		<div id="social-icons" class="text_box">
+			<ul id="icons-list">
+<li><a href="https://plus.google.com/112140188900728080911?prsrc=3" rel="publisher" target="_top" style="text-decoration:none;"><img src="//ssl.gstatic.com/images/icons/gplus-32.png" alt="Google+" style="border:0;width:32px;height:32px;"/></a></li>
+<li><a href="https://twitter.com/caveofprogram"><img src="/icons/twitter.png" alt="Twitter" /></a></li>
+<li><a href="http://www.youtube.com/caveofprogramming"><img src="/icons/youtube.png" alt="YouTube" /></a></li>
+<li><a href="http://feeds.feedburner.com/caveofprogramming"><img src="/icons/rss.png"  alt="RSS" /></a></li>
+<li><a href="https://www.facebook.com/CaveOfProgramming"><img src="/icons/facebook.png" alt="Facebook" /></a></li>
+</ul>
+		</div>
+		<div id="header" class="header">
+<a href="http://www.caveofprogramming.com"><img id="thesis_header_image" src="http://173.248.174.172/~caveofpr/wp-content/uploads/2013/10/cavelogo250x66.png" alt="Cave of Programming header image" width="250" height="66" title="click to return home" /></a>
+		</div>
+		<div id="facebook-like" class="text_box">
+			<div class="fb-like" data-href="http://www.caveofprogramming.com" data-width="250" data-height="80" data-colorscheme="light" data-layout="standard" data-action="like" data-show-faces="false" data-send="false"></div>
+		</div>
+	</div>
+	<div id="navigation">
+		<span class="menu_control">≡ Menu</span>
+<ul id="nav-menu" class="menu"><li id="menu-item-3180" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3180"><a href="http://www.caveofprogramming.com/"><span class="maintext home">Home</span><p class="subtext home">Start here</p></a></li>
+<li id="menu-item-4677" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4677"><a href="http://courses.caveofprogramming.com"><span class="maintext">Courses </span><p class="subtext">Free and Paid</p></a></li>
+<li id="menu-item-3199" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3199"><a href="http://www.caveofprogramming.com/youtube/"><span class="maintext">Videos</span><p class="subtext">/ source code</p></a></li>
+<li id="menu-item-3284" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3284"><a href="http://www.caveofprogramming.com/articles/"><span class="maintext">Articles </span><p class="subtext">Code solutions</p></a></li>
+<li id="menu-item-3171" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3171"><a title="Contact" href="http://www.caveofprogramming.com/contact/"><span class="maintext">Contact </span><p class="subtext">Get in touch</p></a></li>
+<li id="menu-item-3172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3172"><a href="http://www.caveofprogramming.com/about/"><span class="maintext">About </span><p class="subtext">The story</p></a></li>
+<li id="menu-item-3440" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3440"><a href="http://www.caveofprogramming.com/news/"><span class="maintext">News </span><p class="subtext">Cave Blog</p></a></li>
+<li id="menu-item-3289" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3289"><a href="http://www.caveofprogramming.com/links/"><span class="maintext">Links </span><p class="subtext">Useful stuff</p></a></li>
+</ul>
+	</div>
+	<div class="pagewidth">
+		<div class="columns">
+			<div class="content">
+				<div id="post-1695" class="post_box grt top" itemscope itemtype="http://schema.org/Article">
+					<div class="headline_area">
+						<h1 class="headline" itemprop="name">Charts in Java Swing With JFreeChart</h1>
+						<div class="byline small">
+							<span class="post_author_intro">by</span> <span class="post_author" itemprop="author">John</span>
+							<meta itemprop="datePublished" content="2011-12-20" />
+							<meta itemprop="dateModified" content="2014-08-25" />
+							<span class="post_date_intro">on</span> <span class="post_date" title="2011-12-20">December 20, 2011</span>
+						</div>
+					</div>
+					<div class="post_content" itemprop="articleBody">
+<p>Java Swing, the GUI toolkit for Java, has no built-in graphing and charting package. Several free packages are available, the best of which is widely considered to be <a href="http://www.jfree.org/jfreechart/">JFreeChart</a>. JFreeChart is open source and free even for commercial use. So what&#8217;s the catch? The guys who have created JFreeChart don&#8217;t provide any tutorials on how to use it, and indeed they sell the developer guide (which is no doubt excellent) at a premium price.</p>
+<p>So while you can view the Javadoc documentation <a href="http://www.jfree.org/jcommon/api/">here</a>, you&#8217;re a bit stuck if you want a basic sample application to work from.</p>
+<p>Well, not entirely stuck; you can un-jar the demos that come with JFreeChart and browse to the source code.</p>
+<p>However, to save you the trouble, I&#8217;ve already done just that, and here&#8217;s a very brief tutorial on using JFreeChart (after all, I don&#8217;t want to undermine the efforts of the developers to sell their documentation!).</p>
+<h3>A Basic Swing Chart Application</h3>
+<p>In this tutorial, we&#8217;ll create a simple XY line chart. Don&#8217;t be afraid to consult the <a href="http://www.jfree.org/jcommon/api/">JFreeChart API guide</a> to find out what the various function parameters do (since I won&#8217;t explain them here).</p>
+<p>The first step is, of course, to create a dataset to work with. You&#8217;ll probably want a method that formats your data for JFreeChart, like this:</p>
+<pre class="code, brush:java">
+private XYDataset createDataset() {
+
+		DefaultXYDataset ds = new DefaultXYDataset();
+
+		double[][] data = { {0.1, 0.2, 0.3}, {1, 2, 3} };
+
+		ds.addSeries("series1", data);
+
+		return ds;
+	}
+</pre>
+<p>The data corresponding to a single line or set of bars on a chart is known as a &#8220;series&#8221;, and you can have multiple lines (series) on one chart.</p>
+<p>As you can see, I&#8217;ve hardcoded my data; there&#8217;s one array for the x coordinates of your data points and one array for the y coordinates. But of course, you can read these values from a file or database.</p>
+<p>Notice that for each chart type, there is an interface that the dataset for that chart type must implement. To help you implement the interface, there&#8217;s a default implementation of each type available.</p>
+<p>Now you can do this:</p>
+<pre class="code, brush:java">
+XYDataset ds = createDataset();
+</pre>
+<p>The next step is to create a chart and pass it your dataset. The ChartFactory methods have various parameters that you can see by looking at the API doc.</p>
+<pre class="code, brush:java">
+JFreeChart chart = 
+ChartFactory.createXYLineChart("Test Chart",
+				"x", "y", ds, PlotOrientation.VERTICAL, true, true,
+				false);
+</pre>
+<p>Now finally you can add your chart to your Swing container. For that you&#8217;ll need a ChartPanel. Then you can add it just like you&#8217;d add a JPanel or whatever.</p>
+<pre class="code, brush:java">
+ChartPanel cp = new ChartPanel(chart);
+</pre>
+<h3>The Finished Work</h3>
+<p>The finished application looks like this:</p>
+<p><a href="http://www.caveofprogramming.com/java/charts-in-java-swing-with-jfreechart/attachment/chart/" rel="attachment wp-att-1699"><img src="http://173.248.174.172/~caveofpr/wp-content/uploads/2011/12/chart.png" alt="" title="JFreeChart chart" width="706" height="466" class="aligncenter size-full wp-image-1699" /></a></p>
+<p>OK, I didn&#8217;t say it would be the most exciting chart ever. But it&#8217;s not bad for ten minutes&#8217; work!</p>
+<p>Here&#8217;s the source:</p>
+<pre class="code, brush: java">
+import java.util.HashSet;
+
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.xy.DefaultXYDataset;
+import org.jfree.data.xy.XYDataset;
+
+public class App {
+
+	public static void main(String[] args) {
+
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				JFrame frame = new JFrame("Charts");
+
+				frame.setSize(600, 400);
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				frame.setVisible(true);
+
+				XYDataset ds = createDataset();
+				JFreeChart chart = ChartFactory.createXYLineChart("Test Chart",
+						"x", "y", ds, PlotOrientation.VERTICAL, true, true,
+						false);
+
+				ChartPanel cp = new ChartPanel(chart);
+
+				frame.getContentPane().add(cp);
+			}
+		});
+
+	}
+
+	private static XYDataset createDataset() {
+
+		DefaultXYDataset ds = new DefaultXYDataset();
+
+		double[][] data = { {0.1, 0.2, 0.3}, {1, 2, 3} };
+
+		ds.addSeries("series1", data);
+
+		return ds;
+	}
+
+}
+
+</pre>
+<p><center></p>
+<div style="padding: 20px; width:80%; border: 1px solid gray; font-weight: bold;">
+<p>Learn to program Java Swing with my complete video course &#8211; desktop programming and applets. Includes 7 free videos. Click <a href="http://www.udemy.com/java-swing-complete/?couponCode=copface">here</a> for details.</p>
+</div>
+<p></center>
+<p />
+<div class='shareaholic-canvas' data-app-id='7469292' data-app='share_buttons' data-title='Charts in Java Swing With JFreeChart' data-link='http://www.caveofprogramming.com/frontpage/articles/java/charts-in-java-swing-with-jfreechart/' data-summary=''></div>
+<div class='shareaholic-canvas' data-app-id='7469300' data-app='recommendations' data-title='Charts in Java Swing With JFreeChart' data-link='http://www.caveofprogramming.com/frontpage/articles/java/charts-in-java-swing-with-jfreechart/' data-summary=''></div>
+					</div>
+				</div>
+			</div>
+			<div class="sidebar">
+<div class="widget thesis_widget_google_cse" id="thesis-google-cse-2">
+<script>
+  (function() {
+    var cx = '000210221004317570252:tv6ft7nksie';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+</div>
+				<div class="advert">
+					<a class="heading" href="https://www.udemy.com/java-swing-complete/?couponCode=copface">Learn desktop programming in Java.</a>
+<a href="https://www.udemy.com/java-swing-complete/?couponCode=copface"><img src="/images/swing_sm.png" alt="Mastering Java Swing"/>Mastering Java Swing</a> Covers all major widgets, database connectivity and even animation!
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+		<div class="pagewidth">
+			<p class="attribution">Copyright © 2013 John W. Purcell except where indicated otherwise.</p>
+			<p><a href="http://www.caveofprogramming.com/wp-admin/"><abbr title="WordPress">WP</abbr> Admin</a></p>
+		</div>
+	</div>
+</div>
+	
+<!-- START: Syntax Highlighter ComPress -->
+<script type="text/javascript">
+    SyntaxHighlighter.autoloader(
+        'applescript			http://www.caveofprogramming.com/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushAppleScript.js',
+        'actionscript3 as3		http://www.caveofprogramming.com/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushAS3.js',
+        'bash shell				http://www.caveofprogramming.com/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushBash.js',
+        'coldfusion cf			http://www.caveofprogramming.com/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushColdFusion.js',
+        'cpp c					http://www.caveofprogramming.com/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushCpp.js',
+        'c# c-sharp csharp		http://www.caveofprogramming.com/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushCSharp.js',
+        'css					http://www.caveofprogramming.com/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushCss.js',
+        'delphi pascal pas		http://www.caveofprogramming.com/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushDelphi.js',
+        'diff patch			    http://www.caveofprogramming.com/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushDiff.js',
+        'erl erlang				http://www.caveofprogramming.com/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushErlang.js',
+        'groovy					http://www.caveofprogramming.com/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushGroovy.js',
+        'java					http://www.caveofprogramming.com/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushJava.js',
+        'jfx javafx				http://www.caveofprogramming.com/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushJavaFX.js',
+        'js jscript javascript	http://www.caveofprogramming.com/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushJScript.js',
+        'perl pl				http://www.caveofprogramming.com/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushPerl.js',
+        'php					http://www.caveofprogramming.com/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushPhp.js',
+        'text plain				http://www.caveofprogramming.com/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushPlain.js',
+        'powershell ps          http://www.caveofprogramming.com/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushPowerShell.js',
+        'py python				http://www.caveofprogramming.com/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushPython.js',
+        'ruby rails ror rb		http://www.caveofprogramming.com/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushRuby.js',
+        'sass scss              http://www.caveofprogramming.com/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushSass.js',
+        'scala					http://www.caveofprogramming.com/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushScala.js',
+        'sql					http://www.caveofprogramming.com/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushSql.js',
+        'vb vbnet				http://www.caveofprogramming.com/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushVb.js',
+        'xml xhtml xslt html	http://www.caveofprogramming.com/wp-content/plugins/syntax-highlighter-compress/scripts/shBrushXml.js'
+    );
+                        SyntaxHighlighter.defaults['tab-size'] = 4;
+    SyntaxHighlighter.all();
+</script>
+<!-- END: Syntax Highlighter ComPress -->
+
+	<script type='text/javascript' src='http://www.caveofprogramming.com/wp-includes/js/comment-reply.min.js?ver=3.9.2'></script>
+<script type="text/javascript">
+(function(){
+	var classes = document.getElementsByClassName('menu_control');
+	for (i = 0; i < classes.length; i++) {
+		classes[i].onclick = function() {
+			var menu = this.nextElementSibling;
+			if (/show_menu/.test(menu.className))
+				menu.className = menu.className.replace('show_menu', '').trim();
+			else
+				menu.className += ' show_menu';
+		};
+	}
+})();
+</script>
+<noscript><style type="text/css" scoped>.menu { display: block; }</style></noscript>
+
+</body>
+</html>

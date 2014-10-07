@@ -25,19 +25,17 @@ public class OutsideTwoSigma extends PatternRule {
 	//Two of three consecutive points outside the two-sigma warning limits but still within control (3 sigma) limits
 	int nextIndex;
 	boolean[] three;
-	double cl;
-	double sigma;
 
-	public OutsideTwoSigma(double c, double s){
-		this.cl = c;
-		this.sigma = s;
+	public OutsideTwoSigma(double cl, double sigma, double clim, double wlim){
+		this.cl = cl;
+		this.sigma = sigma;
 		this.nextIndex = 0;
 		this.three = new boolean[3];
 		this.name = "Two of three consecutive points outside the two-sigma warning limits but still within control (3 sigma) limits";
 	}
 
 	public boolean check(double value){
-		three[nextIndex] = (Math.abs(value-cl)>=2*sigma && Math.abs(value-cl)<=3*sigma);
+		three[nextIndex] = (Math.abs(value-this.cl)>=this.wlimit*sigma && Math.abs(value-this.cl)<=this.climit*sigma);
 		nextIndex = (nextIndex + 1) % 3;
 		return ((three[0]&&three[1]) || (three[1]&&three[2]) || (three[2]&&three[0]));
 	}

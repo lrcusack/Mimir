@@ -25,12 +25,10 @@ public class OutsideOneSigma extends PatternRule {
 	//Four of five consecutive points beyond the one-sigma limits but still inside of control limits
 	int nextIndex;
 	boolean[] five;
-	double cl;
-	double sigma;
 
-	public OutsideOneSigma(double c, double s){
-		this.cl = c;
-		this.sigma = s;
+	public OutsideOneSigma(double cl, double sigma, double clim, double wlim){
+		this.cl = cl;
+		this.sigma = sigma;
 		this.nextIndex = 0;
 		this.five = new boolean[5];
 		this.name = "Four of five consecutive points beyond the one-sigma limits but still inside of control limits";

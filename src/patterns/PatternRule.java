@@ -24,5 +24,8 @@ package mimir.patterns;
 public abstract class PatternRule{
 	//check returns true if the pattern is recognized, i.e. process is out of control
 	public String name;
+	public double ucl, cl, lcl, uwl, lwl, sigma, climit, wlimit;
+	//public abstract PatternRule(double cl, double sigma, double clim, double wlim);
+	//(this.cl,this.sigma,this.clim,this.wlim)
 	public abstract boolean check(double value);
 }

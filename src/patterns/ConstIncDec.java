@@ -27,7 +27,7 @@ public class ConstIncDec extends PatternRule {
 	int n = 6;
 	double last;
 	boolean up;
-	public ConstIncDec(double cl){
+	public ConstIncDec(double cl, double sigma, double clim, double wlim){
 		this.count = 0;
 		this.last = cl;
 		this.up = true;

@@ -23,13 +23,11 @@ along with Mimir.  If not, see <http://www.gnu.org/licenses/>
 package mimir.patterns;
 public class OutsideLimits extends PatternRule {
 	//One or more points outside of control limits
-	double cl;
-	double ucl;
-	double lcl;
-	public OutsideLimits(double c, double s){
-		this.cl = c;
-		this.ucl = c + 3*s;
-		this.lcl = c - 3*s;
+
+	public OutsideLimits(double cl, double sigma, double clim, double wlim){
+		this.cl = cl;
+		this.ucl = this.cl + clim*sigma;
+		this.lcl = this.cl - clim*sigma;
 		this.name = "One or more points outside of control limits";
 	}
 	public boolean check(double value){

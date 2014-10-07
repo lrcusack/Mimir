@@ -27,7 +27,7 @@ public class AltIncDec extends PatternRule {
 	int n = 14;
 	double last;
 	boolean up;
-	public AltIncDec(double cl){
+	public AltIncDec(double cl, double sigma, double clim, double wlim){
 		this.count = 0;
 		this.last = cl;
 		this.up = true;

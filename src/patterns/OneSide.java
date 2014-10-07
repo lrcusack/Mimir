@@ -23,13 +23,12 @@ along with Mimir.  If not, see <http://www.gnu.org/licenses/>
 package mimir.patterns;
 public class OneSide extends PatternRule {
 	//A run of eight consecutive points on one side of the center line
-	double cl;
 	int count;
 	boolean above;
 	int n = 8;
-	public OneSide(double c){
+	public OneSide(double cl, double sigma, double clim, double wlim){
 		//System.out.println("Just Checking");
-		this.cl = c;
+		this.cl = cl;
 		this.count=0;
 		this.above=true;
 		this.name = "A run of eight consecutive points on one side of the center line";

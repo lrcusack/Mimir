@@ -20,7 +20,7 @@ along with Mimir.  If not, see <http://www.gnu.org/licenses/>
 */
 
 //#### Verified ####
-package mimir.patterns;
+package mimir;
 public class AltIncDec extends PatternRule {
 	//Fourteen points in a row alternating up and down
 	int count;

@@ -20,7 +20,7 @@ along with Mimir.  If not, see <http://www.gnu.org/licenses/>
 */
 
 //broken
-package mimir.patterns;
+package mimir;
 public class OneSide extends PatternRule {
 	//A run of eight consecutive points on one side of the center line
 	int count;

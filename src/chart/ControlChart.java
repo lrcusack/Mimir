@@ -20,12 +20,12 @@ along with Mimir.  If not, see <http://www.gnu.org/licenses/>
 */
 
 
-package mimir.charts;
+package mimir;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import java.util.LinkedList;
 import java.util.ListIterator;
-import mimir.patterns.*;
+import mimir.*;
 
 public class ControlChart{
 	DescriptiveStatistics data;

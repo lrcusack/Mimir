@@ -20,7 +20,7 @@ along with Mimir.  If not, see <http://www.gnu.org/licenses/>
 */
 
 // #### Verified ####
-package mimir.patterns;
+package mimir;
 public class OutsideTwoSigma extends PatternRule {
 	//Two of three consecutive points outside the two-sigma warning limits but still within control (3 sigma) limits
 	int nextIndex;

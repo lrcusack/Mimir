@@ -1,5 +1,4 @@
-import mimir.charts.*;
-import mimir.patterns.*;
+import mimir.*;
 
 
 public class ControlChartTester{

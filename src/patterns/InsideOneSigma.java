@@ -20,7 +20,7 @@ along with Mimir.  If not, see <http://www.gnu.org/licenses/>
 */
 
 // #### Verified ####
-package mimir.patterns;
+package mimir;
 public class InsideOneSigma extends PatternRule {
 	//Fifteen points in a row within one-sigma limits
 	int count;

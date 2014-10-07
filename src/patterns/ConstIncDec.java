@@ -20,7 +20,7 @@ along with Mimir.  If not, see <http://www.gnu.org/licenses/>
 */
 
 // #### Verified ####
-package mimir.patterns;
+package mimir;
 public class ConstIncDec extends PatternRule {
 	//Six points in a row steadily increasing or decreasing
 	int count;

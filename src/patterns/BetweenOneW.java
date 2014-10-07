@@ -20,7 +20,7 @@ along with Mimir.  If not, see <http://www.gnu.org/licenses/>
 */
 
 // #### Verified ####
-package mimir.patterns;
+package mimir;
 public class BetweenOneW extends PatternRule {
 	//Eight points in a row between the one-sigma and two-sigma limits
 	int count;

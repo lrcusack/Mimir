@@ -20,7 +20,7 @@ along with Mimir.  If not, see <http://www.gnu.org/licenses/>
 */
 
 // #### Verified ####
-package mimir.patterns;
+package mimir;
 public class OutsideLimits extends PatternRule {
 	//One or more points outside of control limits
 

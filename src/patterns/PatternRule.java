@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with Mimir.  If not, see <http://www.gnu.org/licenses/>
 */
 
-package mimir.patterns;
+package mimir;
 
 public abstract class PatternRule{
 	//check returns true if the pattern is recognized, i.e. process is out of control

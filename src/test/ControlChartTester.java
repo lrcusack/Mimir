@@ -1,6 +1,5 @@
 import mimir.*;
 
-
 public class ControlChartTester{
 	public static void main(String[] args){
 		double[] vals = new double[100];
